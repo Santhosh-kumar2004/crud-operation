@@ -12,3 +12,11 @@ class UpdateStudent(BaseModel):
     age:Optional[int]=None
     gender:Optional[str]=None
     year:Optional[str]=None
+
+class UserCreate(BaseModel):
+    user_name:str
+    password:str
+
+class UserLogin(BaseModel):
+    user_name:str
+    password:str

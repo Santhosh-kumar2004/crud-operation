@@ -9,3 +9,11 @@ class Student(Base):
     age=Column(Integer,index=True)
     gender=Column(String,index=True)
     year=Column(String,index=True)
+
+
+class User(Base):
+    __tablename__='Users'
+
+    id=Column(Integer,primary_key=True,index=True,autoincrement=True)
+    user_name=Column(String,unique=True,index=True)
+    password=Column(String,index=True)

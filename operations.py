@@ -1,7 +1,19 @@
 from sqlalchemy.orm import Session
-from models import Student
-from schemas import AddStudent,UpdateStudent
+from models import Student,User
+from schemas import AddStudent,UpdateStudent,UserCreate
+from authentication import hash_password
 
+def create_user(database:Session,user:UserCreate):
+    hash_pwd=hash_password(user.password)
+    new_user=User(user_name=user.user_name,password=hash_pwd)
+    database.add(new_user)
+    database.commit()
+    database.refresh(new_user)
+
+    return new_user
+
+def get_user(database:Session,username:str):
+    return database.query(User).filter(User.user_name==username).first()
 
 def get_students(database: Session, limit: int = None):
     query = database.query(Student)
